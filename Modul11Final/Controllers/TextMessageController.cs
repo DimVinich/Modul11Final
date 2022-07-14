@@ -33,19 +33,19 @@ namespace Modul11Final.Controllers
                     var buttons = new List<InlineKeyboardButton[]>();
                     buttons.Add(new[]
                     {
-                        InlineKeyboardButton.WithCallbackData($" Русский" , $"ru"),
-                        InlineKeyboardButton.WithCallbackData($" English" , $"en")
+                        InlineKeyboardButton.WithCallbackData($" Кол-во букв" , $"count"),
+                        InlineKeyboardButton.WithCallbackData($" Сумма цифр" , $"sum")
                     });
 
                     // передаем кнопки вместе с сообщением (параметр ReplyMarkup)
-                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b>  Наш бот превращает аудио в текст.</b> {Environment.NewLine}" +
-                        $"{Environment.NewLine}Можно записать сообщение и переслать другу, если лень печатать.{Environment.NewLine}",
+                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b>  Наш бот может считать</b> {Environment.NewLine}" +
+                        $"{Environment.NewLine}Либо кол-во букв в ведённой строке.{Environment.NewLine}Либо сумму чисел при формате строки 22 33 44",
                             cancellationToken: ct, parseMode: ParseMode.Html, replyMarkup: new InlineKeyboardMarkup(buttons));
 
                     break;
 
                 default:
-                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, "Отправьте аудио для превращения в текст.", cancellationToken: ct);
+                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, "Я не понимаю чего вы от меня хотите", cancellationToken: ct);
                     break;
             }
         }

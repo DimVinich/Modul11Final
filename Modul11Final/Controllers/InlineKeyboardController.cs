@@ -32,19 +32,20 @@ namespace Modul11Final.Controllers
                 return;
 
             // Обновление пользовательской сессии новыми данными
-            _memoryStorage.GetSession(callbackQuery.From.Id).LanguageCode = callbackQuery.Data;
+            //_memoryStorage.GetSession(callbackQuery.From.Id).LanguageCode = callbackQuery.Data;
+            _memoryStorage.GetSession(callbackQuery.From.Id).OperationType = callbackQuery.Data;
 
             // Генерим информационное сообщение
-            string languageText = callbackQuery.Data switch
+            string operType = callbackQuery.Data switch
             {
-                "ru" => " Русский",
-                "en" => " Английский",
+                "count" => " Кол-во",
+                "sum" => " Сумма",
                 _ => String.Empty
             };
 
             // Отправляем в ответ уведомление о выборе
             await _telegramClient.SendTextMessageAsync(callbackQuery.From.Id,
-                $"<b>Язык аудио - {languageText}.{Environment.NewLine}</b>" +
+                $"<b>Тип подсчёта - {operType}.{Environment.NewLine}</b>" +
                 $"{Environment.NewLine}Можно поменять в главном меню.", cancellationToken: ct, parseMode: ParseMode.Html);
         }
     }
