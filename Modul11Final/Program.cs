@@ -11,6 +11,7 @@ using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Modul11Final.Controllers;
+using Modul11Final.Services;
 
 namespace Modul11Final
 {
@@ -38,6 +39,7 @@ namespace Modul11Final
             services.AddTransient<DefaultMessageController>();
             services.AddTransient<TextMessageController>();
             services.AddTransient<InlineKeyboardController>();
+            services.AddSingleton<IStorage, MemoryStorage>();
 
             // Регистрируем объект TelegramBotClient c токеном подключения
             services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient("1735772714:AAG4TLlag_RexSaDZSv5SyznT3to3RajQ1w"));

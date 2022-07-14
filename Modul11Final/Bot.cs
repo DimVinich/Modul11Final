@@ -49,7 +49,7 @@ namespace Modul11Final
             //  Обрабатываем нажатия на кнопки  из Telegram Bot API: https://core.telegram.org/bots/api#callbackquery
             if (update.Type == UpdateType.CallbackQuery)
             {
-                await _telegramClient.SendTextMessageAsync(update.Message.Chat.Id, "Вы нажали кнопку", cancellationToken: cancellationToken);
+                //await _telegramClient.SendTextMessageAsync(update.Message.Chat.Id, "Вы нажали кнопку", cancellationToken: cancellationToken);
                 await _inlineKeyboardController.Handle(update.CallbackQuery, cancellationToken);
                 return;
             }
@@ -58,7 +58,7 @@ namespace Modul11Final
             switch (update.Message!.Type)
             {
                 case MessageType.Text:
-                    await _telegramClient.SendTextMessageAsync(update.Message.From.Id, $"Длина сообщения: {update.Message.Text.Length} знаков", cancellationToken: cancellationToken);
+                    //await _telegramClient.SendTextMessageAsync(update.Message.From.Id, $"Длина сообщения: {update.Message.Text.Length} знаков", cancellationToken: cancellationToken);
                     await _textMessageController.Handle(update.Message, cancellationToken);
                     return;
                 default: // unsupported message
