@@ -11,16 +11,20 @@ using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using Modul11Final.Services;
+using Modul11Final.Models;
 
 namespace Modul11Final.Controllers
 {
     public class TextMessageController
     {
         private readonly ITelegramBotClient _telegramClient;
+        private readonly IStorage _memoryStorage;
 
-        public TextMessageController(ITelegramBotClient telegramBotClient)
+        public TextMessageController(ITelegramBotClient telegramBotClient, IStorage memoryStorage)
         {
             _telegramClient = telegramBotClient;
+            _memoryStorage = memoryStorage;
         }
 
         public async Task Handle(Message message, CancellationToken ct)
@@ -45,7 +49,17 @@ namespace Modul11Final.Controllers
                     break;
 
                 default:
-                    await _telegramClient.SendTextMessageAsync(message.Chat.Id, "Я не понимаю чего вы от меня хотите", cancellationToken: ct);
+
+                    switch (_memoryStorage.GetSession(message.Chat.Id).OperationType)
+                    {
+                        case "sum":
+                            await _telegramClient.SendTextMessageAsync(message.Chat.Id, StringService.CountSum(message.Text), cancellationToken: ct);
+                            break;
+
+                        default:
+                            await _telegramClient.SendTextMessageAsync(message.Chat.Id, StringService.CountString(message.Text), cancellationToken: ct);
+                            break;
+                    }
                     break;
             }
         }
