@@ -40,6 +40,7 @@ namespace Modul11Final
             services.AddTransient<TextMessageController>();
             services.AddTransient<InlineKeyboardController>();
             services.AddSingleton<IStorage, MemoryStorage>();
+            services.AddSingleton<IStringServises, StringServises>();  
 
             // Регистрируем объект TelegramBotClient c токеном подключения
             services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient("1735772714:AAG4TLlag_RexSaDZSv5SyznT3to3RajQ1w"));
