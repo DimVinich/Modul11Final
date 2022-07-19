@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Modul11Final.Services
 {
-    public interface IStringServises
+    public interface IStringServices
     {
         string CountString(string aString);
 

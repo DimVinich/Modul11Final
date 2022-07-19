@@ -25,7 +25,6 @@ namespace Modul11Final.Services
                 return _sessions[chatId];
 
             // Создаем и возвращаем новую, если такой не было
-            //var newSession = new Session() { LanguageCode = "ru" };
             var newSession = new Session() { OperationType = "count" };
             _sessions.TryAdd(chatId, newSession);
             return newSession;

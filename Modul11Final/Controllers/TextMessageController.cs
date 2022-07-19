@@ -14,11 +14,13 @@ namespace Modul11Final.Controllers
     {
         private readonly ITelegramBotClient _telegramClient;
         private readonly IStorage _memoryStorage;
+        private readonly IStringServices _stringServices;
 
-        public TextMessageController(ITelegramBotClient telegramBotClient, IStorage memoryStorage)
+        public TextMessageController(ITelegramBotClient telegramBotClient, IStorage memoryStorage, IStringServices stringServices)
         {
             _telegramClient = telegramBotClient;
             _memoryStorage = memoryStorage;
+            _stringServices = stringServices;
         }
 
         public async Task Handle(Message message, CancellationToken ct)
@@ -47,11 +49,11 @@ namespace Modul11Final.Controllers
                     switch (_memoryStorage.GetSession(message.Chat.Id).OperationType)
                     {
                         case "sum":
-                            await _telegramClient.SendTextMessageAsync(message.Chat.Id, StringService.CountSum(message.Text), cancellationToken: ct);
+                            await _telegramClient.SendTextMessageAsync(message.Chat.Id, _stringServices.CountSum(message.Text), cancellationToken: ct);
                             break;
 
                         default:
-                            await _telegramClient.SendTextMessageAsync(message.Chat.Id, StringService.CountString(message.Text), cancellationToken: ct);
+                            await _telegramClient.SendTextMessageAsync(message.Chat.Id, _stringServices.CountString(message.Text), cancellationToken: ct);
                             break;
                     }
                     break;

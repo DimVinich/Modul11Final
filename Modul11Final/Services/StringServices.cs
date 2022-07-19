@@ -10,15 +10,18 @@ namespace Modul11Final.Services
     /// 1. Подсчёт кол-ва символов. Сразу с фомированиям строки для вывода
     /// 2. Подсчёт суммы введённых чисел, так же с формированим строки для вывода
     /// </summary>
-
-    public static class StringService
+    /// 
+    public class StringServices : IStringServices
     {
-        public static string CountString(string aSrting)
+
+        /// 1. Подсчёт кол-ва символов. Сразу с фомированиям строки для вывода
+        public string CountString(string aString)
         {
-            return $"Длина сообщения: {aSrting.Length} знаков";
+            return $"Длина сообщения: {aString.Length} знаков";
         }
 
-        public static string CountSum(string aString)
+        /// 2. Подсчёт суммы введённых чисел, так же с формированим строки для вывода
+        public string CountSum(string aString)
         {
             double ldh = 0.0;
             double ldSum = 0.0;
@@ -28,9 +31,9 @@ namespace Modul11Final.Services
             {
                 string[] arrString = aString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (arrString.Length < 1) 
+                if (arrString.Length < 1)
                 {
-                    return lsError; 
+                    return lsError;
                 }
 
                 foreach (string lsh in arrString)
@@ -43,7 +46,7 @@ namespace Modul11Final.Services
                         }
                         else
                         {
-                            return lsError;   
+                            return lsError;
                         }
                     }
                 }
@@ -51,10 +54,11 @@ namespace Modul11Final.Services
 
             catch (Exception ex)
             {
-                return lsError + "\n"+ex.Message;
+                return lsError + "\n" + ex.Message;
             }
 
             return $"Сумма введённых чисел: {ldSum}";
+
         }
     }
 }
