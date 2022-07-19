@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
-using Telegram.Bot.Exceptions;
-using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Modul11Final.Services;
-using Modul11Final.Models;
 
 namespace Modul11Final.Controllers
 {
@@ -32,7 +25,6 @@ namespace Modul11Final.Controllers
                 return;
 
             // Обновление пользовательской сессии новыми данными
-            //_memoryStorage.GetSession(callbackQuery.From.Id).LanguageCode = callbackQuery.Data;
             _memoryStorage.GetSession(callbackQuery.From.Id).OperationType = callbackQuery.Data;
 
             // Генерим информационное сообщение
